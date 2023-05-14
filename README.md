@@ -1,7 +1,5 @@
 # LevelUp Tech Challenge
 
-## Aplicação de reservas para Freguesias do Concelho de Pombal
-
 ## Requirements
 - [Node.js](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/)
@@ -9,7 +7,7 @@
 ## Installation
 To run this app locally, you'll need to have Node.js installed on your machine. Once you have Node.js installed, follow these steps:
 
-1. Clone this repository to your local machine using git clone https://github.com/your-username/your-repo-name.git.
+1. Clone this repository to your local machine using git clone https://github.com/DavidCCoimbra/eval-project-LevelUpAcademy.
 2. Navigate to the root directory of the app.
 3. Install dependencies using npm install.
 

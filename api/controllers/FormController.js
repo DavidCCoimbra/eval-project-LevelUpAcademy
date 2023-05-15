@@ -101,10 +101,11 @@ class FormController {
     /* CVC CODE VERIFICATIONS END---------*/
 
     /* EXPIRY DATE VERIFICATIONS BEGIN---------*/
-
-    //We will check if the expiry date is in the 'MM/YY', 'MM/YYYY', 'MMYY', or 'MMYYYY' format. 
-    //We will ignore formats such as 'MMM' and 'MMMM'. 
-    //Note that some users of the API might not include the '/' character automatically when entering a 2-digit year, so the format 'MMYYYY' can be useful."
+    /*
+    *We will check if the expiry date is in the 'MM/YY', 'MM/YYYY', 'MMYY', or 'MMYYYY' format. 
+    *We will ignore formats such as 'MMM' and 'MMMM'. 
+    *Note that some users of the API might not include the '/' character automatically when entering a 2-digit year, so the format 'MMYYYY' can be useful."
+    */
     if (cardExpiryDate.includes('/')) {
       [expiryMonth, expiryYear] = cardExpiryDate.split('/').slice(-2);
     }
@@ -127,16 +128,19 @@ class FormController {
     }
     // Check if the expiry date has the correct amount of digits
     else if (expiryMonthLength !== 2 || (expiryYearLength !== 2 && expiryYearLength !== 4)) {
-      errors.cardExpiryDate = "Card expiration date must be in the format MM/YY or MM/YYYY.";
+      errors.cardExpiryDate = "Card expiration date must be in the format MM/YY, MM/YYYY, MMYY or MMYYYY.";
     }
+    
     // Check if the month is between 1 and 12
     else if ((expiryMonth > 12 || expiryMonth < 1)) {
       errors.cardExpiryDate = "Card month must be between 1 and 12.";
     }
-    //As noted on this page for testing cards (https://docs.adyen.com/development-resources/testing/test-card-numbers#mastercard), we will set the maximum expiry date limit at 7 years. 
-    //Since we don't have the issue date for the credit cards, we will assume that they were issued on the current date and will expire in 7 years. 
-    //Our condition will trigger if the expiry date is more than 7 years from now. 
-    //Additionally, if we receive a 2-digit year such as '99', we will interpret it as '2099', while a 4-digit year will be interpreted as '1999'."
+    /*
+    *As noted on this page for testing cards (https://docs.adyen.com/development-resources/testing/test-card-numbers#mastercard), we will set the maximum expiry date limit at 7 years. 
+    *Since we don't have the issue date for the credit cards, we will assume that they were issued on the current date and will expire in 7 years. 
+    *Our condition will trigger if the expiry date is more than 7 years from now. 
+    *Additionally, if we receive a 2-digit year such as '99', we will interpret it as '2099', while a 4-digit year will be interpreted as '1999'."
+    */
     else if (expiryYearLength === 2 && ((expiryYear > (Number(currentYear) + MAX_EXPIRY_YEAR)))
       || expiryYearLength === 4 && (expiryYear > (Number(currentYearLong) + MAX_EXPIRY_YEAR))) {
       errors.cardExpiryDate = "Card year must be between some months and 7 years from now.";

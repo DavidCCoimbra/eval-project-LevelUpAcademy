@@ -611,7 +611,7 @@ describe('Credit card validation API Expiry Date', function () {
                 .expect(400)
                 .end(function (err, res) {
                     if (err) return done(err);
-                    assert.equal(res.body.errors.cardExpiryDate, 'Card expiration date must be in the format MM/YY or MM/YYYY.');
+                    assert.equal(res.body.errors.cardExpiryDate, 'Card expiration date must be in the format MM/YY, MM/YYYY, MMYY or MMYYYY.');
                     done();
                 });
         });
@@ -631,7 +631,7 @@ describe('Credit card validation API Expiry Date', function () {
                 .expect(400)
                 .end(function (err, res) {
                     if (err) return done(err);
-                    assert.equal(res.body.errors.cardExpiryDate, 'Card expiration date must be in the format MM/YY or MM/YYYY.');
+                    assert.equal(res.body.errors.cardExpiryDate, 'Card expiration date must be in the format MM/YY, MM/YYYY, MMYY or MMYYYY.');
                     done();
                 });
         });
@@ -651,7 +651,7 @@ describe('Credit card validation API Expiry Date', function () {
                 .expect(400)
                 .end(function (err, res) {
                     if (err) return done(err);
-                    assert.equal(res.body.errors.cardExpiryDate, 'Card expiration date must be in the format MM/YY or MM/YYYY.');
+                    assert.equal(res.body.errors.cardExpiryDate, 'Card expiration date must be in the format MM/YY, MM/YYYY, MMYY or MMYYYY.');
                     done();
                 });
         });
@@ -671,7 +671,7 @@ describe('Credit card validation API Expiry Date', function () {
                 .expect(400)
                 .end(function (err, res) {
                     if (err) return done(err);
-                    assert.equal(res.body.errors.cardExpiryDate, 'Card expiration date must be in the format MM/YY or MM/YYYY.');
+                    assert.equal(res.body.errors.cardExpiryDate, 'Card expiration date must be in the format MM/YY, MM/YYYY, MMYY or MMYYYY.');
                     done();
                 });
         });

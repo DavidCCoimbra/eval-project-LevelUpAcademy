@@ -1,6 +1,6 @@
 # Makefile
 
-.PHONY: install start-api start-credit-card
+.PHONY: install start-api start-credit-card start-test
 
 install:
 	cd Api & npm install
@@ -11,3 +11,6 @@ start-api:
 
 start-client:
 	cd credit-card-validator-visual & npm start
+
+start-test:
+	cd Api & npm test

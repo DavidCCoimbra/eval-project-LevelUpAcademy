@@ -2,12 +2,17 @@ const app = require('../app');
 const request = require('supertest');
 const assert = require('assert');
 
-//  TODO: CHANGE TESTS NAMES TO BE MORE DESCRIPTIVE
+/*
+* 1 - for digit in the string
+* x - for any non-digit character in the string
+* / - for slash character
+*   - for space character
+*/
 
 describe('Credit card validation API Variables', function () {
 
     describe('POST /validate', function () {
-        it('should return an error when cvc isn 4 digits.', function (done) {
+        it('should return an error when all the variables are empty.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -20,7 +25,6 @@ describe('Credit card validation API Variables', function () {
                 .expect(400)
                 .end(function (err, res) {
                     if (err) return done(err);
-                    console.log(res.body.errors)
                     assert.equal(res.body.errors.cardCvcCode, 'Please enter a valid CVC code.');
                     assert.equal(res.body.errors.cardNumber, 'Please enter a valid card number.');
                     assert.equal(res.body.errors.cardExpiryDate, 'Please enter a valid date.');
@@ -31,7 +35,7 @@ describe('Credit card validation API Variables', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return an error when only the expiry variable is empty.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -51,7 +55,7 @@ describe('Credit card validation API Variables', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return an error when only the cvc variable is empty.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -71,7 +75,7 @@ describe('Credit card validation API Variables', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return an error when only the type variable is empty.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -91,7 +95,7 @@ describe('Credit card validation API Variables', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return an error when only the pan variable is empty.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -113,7 +117,7 @@ describe('Credit card validation API Variables', function () {
 
 describe('Credit card validation API CardNumber', function () {
     describe('POST /validate', function () {
-        it('should return an error when card number has characters that are not numbers', function (done) {
+        it('should return an error when the pan is not only a string of numbers. (xx)', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -133,7 +137,7 @@ describe('Credit card validation API CardNumber', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when card number has characters that are not numbers', function (done) {
+        it('should return an error when the pan is not only a string of numbers. (x1)', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -153,7 +157,7 @@ describe('Credit card validation API CardNumber', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when card number is not between 16 to 19 digits', function (done) {
+        it('should return an error when card number is not between 16 to 19 digits.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -173,7 +177,7 @@ describe('Credit card validation API CardNumber', function () {
     });
 
     describe('POST /validate', function () {
-        it('If the card type is American Express but the card number does not start with 34 or 37, an error should be returned.', function (done) {
+        it('should return an error when card type is Amex but its not 15 digits.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -193,7 +197,7 @@ describe('Credit card validation API CardNumber', function () {
     });
 
     describe('POST /validate', function () {
-        it('If the card type is American Express but the card number does not start with 34 or 37, an error should be returned.', function (done) {
+        it('should return an error when card type is Amex but the first 2 digits are not "32" or "37".', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -234,7 +238,7 @@ describe('Credit card validation API CardNumber', function () {
 
 describe('Credit card validation API CVC', function () {
     describe('POST /validate', function () {
-        it('should return an error when cvc isn 4 digits.', function (done) {
+        it('should return an error when card type is Amex but the cvc isnt 4 digits.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -254,7 +258,7 @@ describe('Credit card validation API CVC', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when cvc isn 4 digits.', function (done) {
+        it('should return an error when card type its not Amex and cvc isnt 3 digits.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -274,7 +278,7 @@ describe('Credit card validation API CVC', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when cvc isn 4 digits.', function (done) {
+        it('should return an error when cvc is not only a string of numbers (1x1x).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -294,7 +298,7 @@ describe('Credit card validation API CVC', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when cvc isn 4 digits.', function (done) {
+        it('should return an error when cvc is not only a string of numbers (1xx).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -313,7 +317,7 @@ describe('Credit card validation API CVC', function () {
         });
     });
     describe('POST /validate', function () {
-        it('should return an error when cvc isn 4 digits.', function (done) {
+        it('should return an error when cvc is not only a string of numbers (xxxx).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -333,7 +337,7 @@ describe('Credit card validation API CVC', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when cvc isn 4 digits.', function (done) {
+        it('should return an error when cvc is not only a string of numbers (xxx).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -352,12 +356,52 @@ describe('Credit card validation API CVC', function () {
         });
     });
 
+    describe('POST /validate', function () {
+        it('should return an error when cvc is not only a string of numbers (11x).', function (done) {
+            request(app)
+                .post('/validate')
+                .send({
+                    expiry: '12/23',
+                    cvc: '11m',
+                    name: 'David Coimbra',
+                    type: 'visa',
+                    pan: '3734567891234567',
+                })
+                .expect(400)
+                .end(function (err, res) {
+                    if (err) return done(err);
+                    assert.equal(res.body.errors.cardCvcCode, 'Please enter a valid CVC code.');
+                    done();
+                });
+        });
+    });
+
+    describe('POST /validate', function () {
+        it('should return an error when cvc is not only a string of numbers (111x).', function (done) {
+            request(app)
+                .post('/validate')
+                .send({
+                    expiry: '12/23',
+                    cvc: '111m',
+                    name: 'David Coimbra',
+                    type: 'american-express',
+                    pan: '3734567891234567',
+                })
+                .expect(400)
+                .end(function (err, res) {
+                    if (err) return done(err);
+                    assert.equal(res.body.errors.cardCvcCode, 'Please enter a valid CVC code.');
+                    done();
+                });
+        });
+    });
+
 });
 
 describe('Credit card validation API Expiry Date', function () {
 
     describe('POST /validate', function () {
-        it('should return an error when date is not filled properly.', function (done) {
+        it('should return an error when date is not filled properly. (1)', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -377,7 +421,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not filled properly.', function (done) {
+        it('should return an error when date is not filled properly.(11)', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -397,7 +441,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not filled properly.', function (done) {
+        it('should return an error when date is not filled properly.( 1)', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -417,7 +461,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not filled properly.', function (done) {
+        it('should return an error when date is not filled properly. ( 12)', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -437,7 +481,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY ', function (done) {
+        it('should return an error when date is not filled properly. (11/).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -457,7 +501,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY ', function (done) {
+        it('should return an error when date is not filled properly. (xx/xx).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -477,7 +521,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY ', function (done) {
+        it('should return an error when date is not filled properly. (xx/xxxx).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -497,7 +541,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY ', function (done) {
+        it('should return an error when date is not filled properly. (xx/1111).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -517,7 +561,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY ', function (done) {
+        it('should return an error when date is not filled properly. (xx/11).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -538,7 +582,7 @@ describe('Credit card validation API Expiry Date', function () {
 
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY ', function (done) {
+        it('should return an error when date is not filled properly. (11/xx).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -558,7 +602,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY ', function (done) {
+        it('should return an error when date is not filled properly. (11/xxxx).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -578,7 +622,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY ', function (done) {
+        it('should return an error when date is not filled properly. (1x/1x).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -598,7 +642,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"12/1" ', function (done) {
+        it('should return an error when date is not filled properly. (11/1).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -618,7 +662,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"12/199" ', function (done) {
+        it('should return an error when date is not filled properly. (11/111).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -638,7 +682,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2/19" ', function (done) {
+        it('should return an error when date is not filled properly. (  /11).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -658,7 +702,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2/199" ', function (done) {
+        it('should return an error when date is not filled properly. ( 2/111)." ', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -679,7 +723,7 @@ describe('Credit card validation API Expiry Date', function () {
 
 
     describe('POST /validate', function () {
-        it('should return an error when month is not valid INPUT:"-1/25" ', function (done) {
+        it('should return an error when month is not filled properly (-1/11).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -698,7 +742,7 @@ describe('Credit card validation API Expiry Date', function () {
         });
     });
     describe('POST /validate', function () {
-        it('should return an error when month is not valid INPUT:"13/25" ', function (done) {
+        it('should return an error when month is not filled properly (11/11).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -719,7 +763,7 @@ describe('Credit card validation API Expiry Date', function () {
 
 
     describe('POST /validate', function () {
-        it('should return an error when month is not valid INPUT:"12/25" ', function (done) {
+        it('should return an error when card expiry year is longer than the limit (11/1111).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -740,7 +784,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when month is not valid INPUT:"12/25" ', function (done) {
+        it('should return an error when card expiry year is longer than the limit (11/11).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -761,7 +805,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when month is not valid INPUT:"12/25" ', function (done) {
+        it('should return an error when card expiry year is longer than the limit (1111).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -783,7 +827,7 @@ describe('Credit card validation API Expiry Date', function () {
 
 
     describe('POST /validate', function () {
-        it('should return an error when month is not valid INPUT:"12/25" ', function (done) {
+        it('should return an error when card expiry year is longer than the limit (111111).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -805,7 +849,7 @@ describe('Credit card validation API Expiry Date', function () {
 
 
     describe('POST /validate', function () {
-        it('should return an error when month is not valid INPUT:"12/25" ', function (done) {
+        it('should return an error when card is outdated (11/11).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -825,7 +869,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when month is not valid INPUT:"12/25" ', function (done) {
+        it('should return an error when card is outdated (11/11).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -846,7 +890,7 @@ describe('Credit card validation API Expiry Date', function () {
 
 
     describe('POST /validate', function () {
-        it('should return an error when month is not valid INPUT:"12/25" ', function (done) {
+        it('should return an error when card is outdated (11/1111).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -867,7 +911,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when month is not valid INPUT:"12/25" ', function (done) {
+        it('should return an error when card is outdated (11/1111).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -890,7 +934,7 @@ describe('Credit card validation API Expiry Date', function () {
 
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return an error when card is outdated (1111).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -911,7 +955,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return an error when card is outdated (1111).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -932,7 +976,7 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return an error when card is outdated (111111).', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -958,7 +1002,7 @@ describe('Credit card Positive Tests', function () {
     //VISA 
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return ok when visa card is valid.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -979,7 +1023,7 @@ describe('Credit card Positive Tests', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return ok when visa card is valid.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -1000,7 +1044,7 @@ describe('Credit card Positive Tests', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return ok when visa card is valid.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -1021,7 +1065,7 @@ describe('Credit card Positive Tests', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return ok when visa card is valid.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -1043,7 +1087,7 @@ describe('Credit card Positive Tests', function () {
 
     // AMERICAN EXPRESS 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return ok when Amex card is valid.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -1063,7 +1107,7 @@ describe('Credit card Positive Tests', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return ok when Amex card is valid.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -1084,7 +1128,7 @@ describe('Credit card Positive Tests', function () {
 
     // MASTERCARD 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return ok when mastercard card is valid.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -1105,7 +1149,7 @@ describe('Credit card Positive Tests', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return ok when mastercard card is valid.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -1126,7 +1170,7 @@ describe('Credit card Positive Tests', function () {
     });
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return ok when mastercard card is valid.', function (done) {
             request(app)
                 .post('/validate')
                 .send({
@@ -1148,7 +1192,7 @@ describe('Credit card Positive Tests', function () {
 
 
     describe('POST /validate', function () {
-        it('should return an error when date is not on the right format MM/YY or MM/YYYY INPUT:"2219" ', function (done) {
+        it('should return ok when mastercard card is valid.', function (done) {
             request(app)
                 .post('/validate')
                 .send({

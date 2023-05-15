@@ -3,7 +3,7 @@
 ## Requirements
 - [Node.js](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/)
-- [Makefile]https://www.gnu.org/software/make/ (if you wanna use it)
+- [Makefile](https://www.gnu.org/software/make/) (if you wanna use it)
 
 ## Installation
 To run this app locally, you'll need to have Node.js installed on your machine. Once you have Node.js installed, follow these steps:

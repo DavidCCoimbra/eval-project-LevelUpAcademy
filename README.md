@@ -51,8 +51,6 @@ $ make start-test
 ```
 ## Technologies
 
-Technologies to develop this API
-
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
 - [Jest](https://jestjs.io/)

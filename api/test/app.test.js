@@ -7,6 +7,7 @@ const assert = require('assert');
 * x - for any non-digit character in the string
 * / - for slash character
 *   - for space character
+* 0 - 0 is treated as empty in a string
 */
 
 describe('Credit card validation API Variables', function () {
@@ -421,6 +422,27 @@ describe('Credit card validation API Expiry Date', function () {
     });
 
     describe('POST /validate', function () {
+        it('should return an error when month is not filled properly (00/11).', function (done) {
+            request(app)
+                .post('/validate')
+                .send({
+                    expiry: '00/25',
+                    cvc: '123',
+                    name: 'David Coimbra',
+                    type: 'visa',
+                    pan: '3734567891234567',
+                })
+                .expect(400)
+                .end(function (err, res) {
+                    if (err) return done(err);
+                    console.log(res.body.errors.cardExpiryDate)
+                    assert.equal(res.body.errors.cardExpiryDate, 'Please enter a valid date.');
+                    done();
+                });
+        });
+    });
+
+    describe('POST /validate', function () {
         it('should return an error when date is not filled properly.(11)', function (done) {
             request(app)
                 .post('/validate')
@@ -720,7 +742,6 @@ describe('Credit card validation API Expiry Date', function () {
                 });
         });
     });
-
 
     describe('POST /validate', function () {
         it('should return an error when month is not filled properly (-1/11).', function (done) {

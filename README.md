@@ -1,7 +1,7 @@
 # LevelUp Tech Challenge
 
 ## Requirements
-- [Node.js](https://nodejs.org/en/)
+- [Node.js v18.16.0](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/)
 
 ## Installation
@@ -18,7 +18,7 @@ To run this app locally, you'll need to have Node.js installed on your machine. 
 ```bash
 #Navigate to the api folder and in one terminal window run the following command to start the backend:
 $ npm run dev
-#This will start the backend at http://localhost:9000, you can let it run on the background, no need to open the link (make sure you're not using the port :9000).
+#This will start the backend at http://localhost:9000, you can let it run on the background, no need to open the link, since we don't have any type of interface for it in this example (make sure you're not using the port :9000).
 
 #Navigate to the credit-card-validator-visual folder and in one terminal window run the following command to start the frontend:
 $ npm run start

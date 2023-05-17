@@ -27,9 +27,9 @@ $ npm run start
 ```
 ## How to use Jest Tests
 ```bash
-#Navigate to the root folder of the app
+#Navigate to the api folder of the app
 #Open a terminal window and run the following command:
-$ make start-test
+$ npm test
 ```
 ## Technologies
 

@@ -41,7 +41,7 @@ $ npm test
 - [VS Code](https://code.visualstudio.com/)
 
 ## Operating System
-[Windows 10 Home]
+Windows 10 Home
 
 # Express Application Generator
 # React App

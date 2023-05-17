@@ -7,7 +7,7 @@
 ## Installation
 To run this app locally, you'll need to have Node.js installed on your machine. Once you have Node.js installed, follow these steps:
 
-   1. Clone this repository to your local machine using git clone https://github.com/DavidCCoimbra/eval-project-LevelUpAcademy.
+   1. Clone this repository to your local machine using git clone https://github.com/DavidCCoimbra/eval-project-LevelUpAcademy.git.
    2. Navigate to the root directory of the app.
    3. Navigate to the api directory
    4. Install dependencies using npm install.
